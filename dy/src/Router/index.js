@@ -14,29 +14,36 @@ import List from "../Components/List";
 import Chat from "../Components/Detail/Chat";
 import Play from "../Components/Detail/Play";
 
+import {Provider} from "react-redux"; //顶层组件，负责分发store
+//给每个容器组件， 不需要我们自己引入store
+
+import store from "../Redux"
 
 const router = (
-	<Router>
-		<App>
-			<Switch>
-				<Route path="/home" component={Home}/>
+	<Provider store={store}>
+		<Router>
+			<App>
+				<Switch>
+					<Route path="/home" component={Home}/>
 
-				<Route path="/detail/:detailId" render={()=>
-					<Detail>
-						<Switch>
-							<Route path="/detail/chat" component={Chat} />
-							<Route path="/detail/play" component={Play} />
-						</Switch>
-					</Detail>
-				}/>
+					<Route path="/detail/:detailId" render={()=>
+						<Detail>
+							<Switch>
+								<Route path="/detail/chat" component={Chat} />
+								<Route path="/detail/play" component={Play} />
+								<Redirect from="/detail" to="/detail/chat"/>
+							</Switch>
+						</Detail>
+					}/>
 
-				<Route path="/list/:listId" component={List}/>
-				
+					<Route path="/list/:listId" component={List}/>
+					
 
-				<Redirect from="*" to="/home"/>
-			</Switch>
-		</App>
-	</Router>
+					<Redirect from="*" to="/home"/>
+				</Switch>
+			</App>
+		</Router>
+	</Provider>
 )
 
 export default router
