@@ -14,13 +14,15 @@ import List from "../Components/List";
 import Chat from "../Components/Detail/Chat";
 import Play from "../Components/Detail/Play";
 
-
+import {Provider} from "react-redux";
+import store from "../Redux";
 const router = (
+	<Provider store={store}>
 	<Router>
 		<App>
+		{console.log(this)}
 			<Switch>
-				<Route path="/home" component={Home}/>
-
+				<Route path="/home" component={Home} />
 				<Route path="/detail/:detailId" render={()=>
 					<Detail>
 						<Switch>
@@ -37,6 +39,6 @@ const router = (
 			</Switch>
 		</App>
 	</Router>
+	</Provider>
 )
-
 export default router
