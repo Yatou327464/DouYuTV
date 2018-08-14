@@ -1,0 +1,36 @@
+#sidebar {
+  width: 100%;
+  height: 100%;
+  display: flex; }
+  #sidebar .warp {
+    width: 90%;
+    display: flex; }
+    #sidebar .warp .warp-nav {
+      width: 90%;
+      font-size: 0;
+      white-space: nowrap;
+      overflow: scroll;
+      padding: 0; }
+      #sidebar .warp .warp-nav .item {
+        padding: 10px 10px;
+        font-size: 14px;
+        height: 50px;
+        position: relative;
+        text-align: center;
+        line-height: 50px;
+        color: #fff;
+        display: inline;
+        color: #3f3f3f; }
+        #sidebar .warp .warp-nav .item b {
+          display: none; }
+      #sidebar .warp .warp-nav .cur {
+        color: #ff5d23;
+        font-weight: 700; }
+        #sidebar .warp .warp-nav .cur b {
+          position: absolute;
+          width: 100%;
+          display: block;
+          height: 2px;
+          left: 0;
+          bottom: 10px;
+          background-color: #fa7122; }
