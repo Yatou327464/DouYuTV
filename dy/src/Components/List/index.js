@@ -1,7 +1,6 @@
 import React,{Component} from "react";
 import "./index.css"
 import axios from "axios";
-import store from "../../Redux"; //引入 公共store ,“全局”store
 import {connect} from "react-redux";//用connect函数 处理自己写的组件，
 
 class List extends Component{
@@ -29,7 +28,7 @@ class List extends Component{
 							<li key={item.rid} onClick={this.listClick.bind(this,item)}>
 								<div className="roomShow">
 									<span className="icoTop iconfont icon-zuire"> {item.hn} &nbsp;</span>
-									<img src={item.roomSrc}/>
+									<img src={item.roomSrc} alt={item.nickname}/>
 									<span className="icoBottom iconfont icon-wo"> {item.nickname}</span>
 								</div>
 								<p>{item.roomName}</p>
@@ -46,7 +45,7 @@ class List extends Component{
 
 	componentDidMount(){
 		this.setState({
-			title:JSON.parse(localStorage.getItem("listPage")).name
+			title:JSON.parse(window.localStorage.getItem('listPage')).name
 		},()=>{
 			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
 					this.setState({
@@ -54,20 +53,21 @@ class List extends Component{
 					})
 				});
 		});
-
 	}
 
 	handleClick(){
-		// console.log(this.props.history);
 		this.setState({
 			nowPage : ++this.state.nowPage
-		})
-		axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
-			this.setState({
-				datalist:[...this.state.datalist,...res.data.data.list]
+		},()=>
+			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
+				this.setState({
+					datalist:[...this.state.datalist,...res.data.data.list]
+				})
 			})
-		})
+		)
+		
 	}
+
 
 	listClick(item){
 		console.log(item)
@@ -76,8 +76,8 @@ class List extends Component{
 		this.props.history.push(`/detail/${item.rid}/`);
 	}
 
-
 }
+
 export default connect(
 		state=>{
 			return {
@@ -95,4 +95,9 @@ export default connect(
 
 
 
+
+
+
 	)(List)
+
+

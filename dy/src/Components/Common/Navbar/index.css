@@ -1,0 +1,9 @@
+#navbar {
+  width: 100%;
+  height: 100%;
+  display: flex; }
+  #navbar .navbar-warp {
+    width: 70%;
+    flex: 1; }
+  #navbar .navbar-other {
+    width: 10%; }

@@ -20,7 +20,6 @@ const router = (
 	<Provider store={store}>
 	<Router>
 		<App>
-		{console.log(this)}
 			<Switch>
 				<Route path="/home" component={Home} />
 				<Route path="/detail/:detailId" render={()=>

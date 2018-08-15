@@ -1,5 +1,6 @@
 #classify {
-  background: #fff; }
+  background: #fff;
+  width: 10%; }
   #classify .classify-all {
     position: fixed;
     top: 0;
@@ -64,3 +65,5 @@
             display: block;
             text-align: center;
             font-size: 10px; }
+  #classify .dis {
+    display: none; }
