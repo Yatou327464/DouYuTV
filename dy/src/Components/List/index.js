@@ -35,7 +35,7 @@ class List extends Component{
 				<ul>
 					{
 						this.state.datalist.map(item=>
-							<li key={item.rid}>
+							<li key={item.rid} onClick={this.listClick.bind(this,item)}>
 								<div className="roomShow">
 									<span className="icoTop iconfont icon-zuire"> {item.hn} &nbsp;</span>
 									<img src={item.roomSrc} alt={item.nickname}/>
@@ -91,6 +91,15 @@ class List extends Component{
 		)
 		
 	}
+
+
+	listClick(item){
+		console.log(item)
+		this.props.detailPage(item);
+		localStorage.setItem('detailPage',JSON.stringify(item));
+		this.props.history.push(`/detail/${item.rid}/`);
+	}
+
 }
 
 export default connect(
@@ -98,7 +107,21 @@ export default connect(
 			return {
 				titleObj:state.listReducer
 			}
+		},
+		{
+			detailPage(item){
+			    return {
+					type:"detailPage",
+					payload:item
+				}		
+			}
 		}
 
+
+
+
+
+
 	)(List)
+
 
