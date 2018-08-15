@@ -4,7 +4,6 @@ const ListReducer = (prevState={},action={})=>{
    // console.log(action)
    switch(type){
    		case "navListPage":
-   			console.log("navListPage",payload);
    			return {...prevState,...payload};
    		default :
    			return prevState;

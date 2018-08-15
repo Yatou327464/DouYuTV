@@ -26,27 +26,25 @@ class Sidebar extends Component{
 					}
 					</div>
 			    </nav>
-			    {this.props.children}
-			    
+			    {this.props.children}			    
 			</div>
 		)
 	}
 	componentDidMount() {
 		Promise.all([axios.get("/api/cate/recList?cid=&ct=")]).then(res=>{
-			// console.log(res[0].data.data)
 				this.setState({
 					menuList:[...this.state.menuList,...res[0].data.data]
 				})
 		}).catch(error=>{
-			console.log(error)//就是出错的信息		
+			console.log(error)		
 		})
 	}
 	componentDidUpdate() {
 	 
 	}
 	navLintClick(item){
-		this.props.navListPage(item);
-		// console.log(this.props);
+		this.props.navListPage(item);//存储list数据到redux
+		localStorage.setItem('listPage',JSON.stringify(item));//存储list数据到本地
 		this.props.history.push(`/list/${item.shortName}`);
 	}
 	

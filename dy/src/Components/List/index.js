@@ -1,13 +1,16 @@
 import React,{Component} from "react";
 import "./index.css"
 import axios from "axios";
+import {connect} from "react-redux";//用connect函数 处理自己写的组件，
 
 class List extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			datalist:[],
-			nowPage:1
+			nowPage:1,
+			title:'',
+			shortName:''
 		};
 	}
 
@@ -17,7 +20,7 @@ class List extends Component{
 			<div id="listBox">
 				<div className="navBox">
 					<span className="iconfont icon-bofang"></span>
-					<p>刺激战场</p>
+					<p>{this.state.title}</p>
 				</div>
 				<ul>
 					{
@@ -41,19 +44,22 @@ class List extends Component{
 	}
 
 	componentDidMount(){
-		axios.get(`/api/room/list?page=${this.state.nowPage}&type=jdqscjzc`).then(res=>{
-			this.setState({
-				datalist:res.data.data.list
-			})
-		})
+		this.setState({
+			title:JSON.parse(window.localStorage.getItem('listPage')).name
+		},()=>{
+			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
+					this.setState({
+						datalist:res.data.data.list
+					})
+				});
+		});
 	}
 
 	handleClick(){
-		// console.log(this.props.history);
 		this.setState({
 			nowPage : ++this.state.nowPage
 		})
-		axios.get(`/api/room/list?page=${this.state.nowPage}&type=jdqscjzc`).then(res=>{
+		axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
 			this.setState({
 				datalist:[...this.state.datalist,...res.data.data.list]
 			})
@@ -62,4 +68,13 @@ class List extends Component{
 
 
 }
-export default List
+
+export default connect(
+		state=>{
+			return {
+				titleObj:state.listReducer
+			}
+		}
+
+	)(List)
+
