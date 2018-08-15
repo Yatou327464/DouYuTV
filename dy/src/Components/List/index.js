@@ -28,7 +28,7 @@ class List extends Component{
 							<li key={item.rid}>
 								<div className="roomShow">
 									<span className="icoTop iconfont icon-zuire"> {item.hn} &nbsp;</span>
-									<img src={item.roomSrc}/>
+									<img src={item.roomSrc} alt={item.nickname}/>
 									<span className="icoBottom iconfont icon-wo"> {item.nickname}</span>
 								</div>
 								<p>{item.roomName}</p>
@@ -53,20 +53,31 @@ class List extends Component{
 					})
 				});
 		});
+		// store.subscribe(()=>{
+		// 	this.setState({
+		// 		title:store.getState()
+		// 	})
+		// })
+		// console.log(this.props.titleObj);
+
+		// store.dispatch({
+		// 	type:"navListPage",
+		// 	payload: "item"
+		// })
 	}
 
 	handleClick(){
 		this.setState({
 			nowPage : ++this.state.nowPage
-		})
-		axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
-			this.setState({
-				datalist:[...this.state.datalist,...res.data.data.list]
+		},()=>
+			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
+				this.setState({
+					datalist:[...this.state.datalist,...res.data.data.list]
+				})
 			})
-		})
+		)
+		
 	}
-
-
 }
 
 export default connect(
