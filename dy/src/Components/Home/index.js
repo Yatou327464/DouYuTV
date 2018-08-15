@@ -15,7 +15,9 @@ class Home extends Component{
 		return (
 			<section id="home">
 				
-				<Navbar history={this.props.history}/>
+				<Navbar history={this.props.history}>
+					
+				</Navbar>
 
      			<Sidebar history={this.props.history}>	
         			<Classify history={this.props.history}/>

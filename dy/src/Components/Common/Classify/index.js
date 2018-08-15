@@ -1,7 +1,7 @@
 import React,{Component} from "react"
 import "./index.css"
 
-import store from "../../../Redux"; //引入 公共store ,“全局”store
+
 import {connect} from "react-redux";//用connect函数 处理自己写的组件，
 import axios from "axios"
 class Classify extends Component{
@@ -20,58 +20,55 @@ class Classify extends Component{
 				<div className="more">
 						<i onClick={this.moreClick.bind(this)}>more</i>
 				</div>
-				{
-					this.state.isShow?
-						<div className='classify-all'>
-							<h2><span onClick={this.moreClick.bind(this)}>X</span>选择分类</h2>
-						    <div className="classify-nav">
-						    {
-						        this.props.navList.map((item,index)=>
-						        <span key={item.cate1Id} className={this.state.navIndex === index?'item cur':'item'} onClick={this.otherClick.bind(this,item,index)}>
-						           	{item.cate1Name}
-						         	<b></b>
-						         </span>
-						        )     
-						    }
-						    </div>
-							<div className="classify-icon">
-							{
-								this.state.imgList.map(item=>
-									<div key={item.cate2Id} className="box">
-									   <p>
-										  <img src={item.icon}/>
-									      <span>{item.cate2Name}</span>
-									   </p>
-									</div>
-								)
-							}
+				<div className={this.state.isShow?'classify-all':'classify-all dis'} >
+					<h2><span onClick={this.moreClick.bind(this)}>X</span>选择分类</h2>
+				    <div className="classify-nav">
+				    {
+				        this.props.navList.map((item,index)=>
+				        <span key={item.cate1Id} className={this.state.navIndex === index?'item cur':'item'} onClick={this.otherClick.bind(this,item,index)}>
+				           	{item.cate1Name}
+				         	<b></b>
+				         </span>
+				        )     
+				    }
+				    </div>
+					<div className="classify-icon">
+					{
+						this.state.imgList.map(item=>
+							<div key={item.cate2Id} className="box">
+							   <p>
+								  <img src={item.icon} alt={item.cate2Name}/>
+							      <span>{item.cate2Name}</span>
+							   </p>
 							</div>
-						</div>
-					:''
-				}		    		  
+						)
+					}
+					</div>
+				</div>
+				    		  
 			</nav>
 		)
 	}
 	componentDidMount() {
-		if(this.props.navList.length==1  ){
-			this.props.classifynavList();
-		}
-		if(this.props.imgList.length==0  ){
-			Promise.all([axios.get("/api/cate/list?type=")]).then(res=>{
-				this.setState({
+		Promise.all([axios.get("/api/cate/list?type=")]).then(res=>{
+			if(this.props.navList.length===1  ){
+				this.props.classifynavList(res[0]);
+			}
+			if (this.props.imgList.length===0 ) {
+				this.props.classifyimgList(res[0]);
+			}
+			this.setState({
 					imgList:res[0].data.data.cate2Info
-				})
-			}).catch(error=>{
-				console.log(error)		
 			})
-			this.props.classifyimgList();
-		}
+		}).catch(error=>{
+				console.log(error)//就是出错的信息		
+		})
 	}
 	componentDidUpdate() {
 	 
 	}
 	moreClick(){
-		console.log(this.props.history);
+		
 		this.setState ({
 			isShow :!this.state.isShow
 		})
@@ -107,26 +104,17 @@ export default connect(
 		}
 	},
 	{
-		classifynavList(){
-			return Promise.all([axios.get("/api/cate/list?type=")]).then(res=>{
-				return {
+		classifynavList(res){
+			return {
 					type:"classifynavList",
-					payload:res[0].data.data.cate1Info
-				}	
-			}).catch(error=>{
-				console.log(error)//就是出错的信息		
-			})
-			
+					payload:res.data.data.cate1Info
+				}		
 		},
-		classifyimgList(){
-			return Promise.all([axios.get("/api/cate/list?type=")]).then(res=>{
-				return {
+		classifyimgList(res){
+			return  {
 					type:"classifyimgList",
-					payload:res[0].data.data.cate2Info
+					payload:res.data.data.cate2Info
 				}	
-			}).catch(error=>{
-				console.log(error)//就是出错的信息		
-			})
 		}
 	}
 	)(Classify)

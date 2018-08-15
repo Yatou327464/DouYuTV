@@ -12,10 +12,12 @@ class Navbar extends Component{
 	render(){
 		return (
 			<nav id="navbar">
-
-				
-				<a onClick={this.a.bind(this)}>这是NavBar</a>
-
+				<div className="navbar-warp">
+					<a onClick={this.a.bind(this)}>这是NavBar</a>
+				</div>
+				<div className="navbar-other">
+				{this.props.children}
+				</div>
 			</nav>
 		)
 	}
