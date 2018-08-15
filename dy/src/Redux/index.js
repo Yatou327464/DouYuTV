@@ -10,11 +10,26 @@
 
 // //reducer 接受的参数是一个对象 是浅复制
 // //对象不能直接修改， 需要深复制一份再修改
-// const reducer = ()=>{
-	
-	
-// }
 
-// const store = createStore(); //创建store,传一个参数是reducer
+import {createStore,combineReducers,applyMiddleware,compose } from "redux";// createStore
+import classifyImgReducer from "./Reducer/classifyImgReducer";
+import classifyNavReducer from "./Reducer/classifyNavReducer";
+import listReducer from "./Reducer/listReducer";
 
-// export default store;
+import thunk from "redux-thunk";
+import reduxpromise from "redux-promise";
+
+const reducer = combineReducers({
+	classifyImgReducer,
+	classifyNavReducer,
+	listReducer
+})
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducer,composeEnhancers(
+applyMiddleware(thunk,reduxpromise)
+  ));
+
+export default store;
+

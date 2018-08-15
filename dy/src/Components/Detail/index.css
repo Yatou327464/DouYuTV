@@ -1,0 +1,19 @@
+div#detail div.image {
+  height: 200px;
+  width: 100%;
+  background: red;
+  border: 1px solid #ccc; }
+
+div#detail ul.nav li {
+  height: 40px;
+  line-height: 40px;
+  float: left;
+  width: 50%;
+  border-bottom: 1px solid #ccc; }
+  div#detail ul.nav li Navlink {
+    height: 40px;
+    display: block; }
+
+div#detail .active {
+  color: #f50;
+  border-bottom: 1px solid #f50; }

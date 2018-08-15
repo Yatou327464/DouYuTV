@@ -14,6 +14,7 @@ import List from "../Components/List";
 import Chat from "../Components/Detail/Chat";
 import Play from "../Components/Detail/Play";
 
+
 import {Provider} from "react-redux"; //顶层组件，负责分发store
 //给每个容器组件， 不需要我们自己引入store
 
@@ -43,7 +44,5 @@ const router = (
 				</Switch>
 			</App>
 		</Router>
-	</Provider>
-)
-
+	</Provider>)
 export default router
