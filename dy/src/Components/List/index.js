@@ -116,12 +116,6 @@ export default connect(
 				}		
 			}
 		}
-
-
-
-
-
-
 	)(List)
 
 
