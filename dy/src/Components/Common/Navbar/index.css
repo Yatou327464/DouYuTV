@@ -1,9 +1,34 @@
 #navbar {
   width: 100%;
-  height: 100%;
+  height: 54px;
   display: flex; }
   #navbar .navbar-warp {
-    width: 70%;
-    flex: 1; }
-  #navbar .navbar-other {
-    width: 10%; }
+    flex: 1;
+    height: 50px;
+    line-height: 50px; }
+    #navbar .navbar-warp h1.logo {
+      height: 50px;
+      line-height: 50px;
+      float: left;
+      font-size: 1em;
+      margin: 0; }
+    #navbar .navbar-warp .btn-app {
+      height: 30px;
+      width: 70px;
+      border-radius: 3px;
+      background: none;
+      margin: 10px 0 0 0;
+      border: 1px solid #ff5d23;
+      color: #ff5d23;
+      font-size: 10px;
+      float: left; }
+    #navbar .navbar-warp .btn-charge {
+      height: 30px;
+      width: 49px;
+      color: #fff;
+      background: #ff5d23;
+      float: left;
+      border-radius: 3px;
+      border: none;
+      margin: 10px 0 0 10px;
+      font-size: 10px; }

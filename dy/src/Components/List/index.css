@@ -71,3 +71,12 @@
   line-height: 50px;
   font-size: 14px;
   color: #999; }
+
+#listBox .list-navbarBg {
+  background: #f8f8f8; }
+  #listBox .list-navbarBg .list-classify {
+    margin-top: 17px;
+    width: 20%;
+    color: #999; }
+    #listBox .list-navbarBg .list-classify .list-classify-more {
+      margin-left: 10px; }

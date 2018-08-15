@@ -11,6 +11,7 @@ import App from "../App"; //导入APP组件
 import Home from "../Components/Home";
 import Detail from "../Components/Detail";
 import List from "../Components/List";
+import Search from "../Components/Search";
 import Chat from "../Components/Detail/Chat";
 import Play from "../Components/Detail/Play";
 
@@ -30,7 +31,7 @@ const router = (
 						</Switch>
 					</Detail>
 				}/>
-
+				<Route path="/search" component={Search}/>
 				<Route path="/list/:listId" component={List}/>
 				
 

@@ -13,16 +13,23 @@ class Navbar extends Component{
 		return (
 			<nav id="navbar">
 				<div className="navbar-warp">
-					<a onClick={this.a.bind(this)}>这是NavBar</a>
+					<h1 className="logo">
+						<a href="/home"><img src="./img/logo.jpg" alt="logo" width="100px"/></a>
+					</h1>
+					<button className="btn-app" onClick={this.appClick.bind(this)}>打开APP</button>
+					<button className="btn-charge" onClick={this.chargeClick.bind(this)}>充值</button>
 				</div>
-				<div className="navbar-other">
-				{this.props.children}
-				</div>
+				
+					{this.props.children}
+				
 			</nav>
 		)
 	}
-	a(){
-		console.log(this)
+	appClick(){
+		alert('这是app页面')
+	}
+	chargeClick(){
+		alert('这是充值页面')
 	}
 }
 

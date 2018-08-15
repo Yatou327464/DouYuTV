@@ -2,7 +2,8 @@ import React,{Component} from "react";
 import "./index.css"
 import axios from "axios";
 import {connect} from "react-redux";//用connect函数 处理自己写的组件，
-
+import Navbar from '../Common/Navbar'
+import Classify from '../Common/Classify'
 class List extends Component{
 	constructor(props){
 		super(props);
@@ -13,11 +14,20 @@ class List extends Component{
 			shortName:''
 		};
 	}
-
-
 	render(){
 		return (
 			<div id="listBox">
+				{/*引入navbar  并自己设计外部样式*/}
+				<div className="list-navbarBg">
+					<Navbar>
+						<div className="list-classify">
+							<Classify history={this.props.history} >
+								<a className="list-classify-more">更多</a>
+							</Classify>
+						</div>
+					</Navbar>
+				</div>
+
 				<div className="navBox">
 					<span className="iconfont icon-bofang"></span>
 					<p>{this.state.title}</p>
@@ -44,8 +54,10 @@ class List extends Component{
 	}
 
 	componentDidMount(){
+		var newTitle = JSON.parse(window.localStorage.getItem('listPage')).name ||
+		JSON.parse(window.localStorage.getItem('listPage')).cate2Name 
 		this.setState({
-			title:JSON.parse(window.localStorage.getItem('listPage')).name
+			title:newTitle
 		},()=>{
 			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
 					this.setState({
@@ -53,19 +65,20 @@ class List extends Component{
 					})
 				});
 		});
-		// store.subscribe(()=>{
-		// 	this.setState({
-		// 		title:store.getState()
-		// 	})
-		// })
-		// console.log(this.props.titleObj);
-
-		// store.dispatch({
-		// 	type:"navListPage",
-		// 	payload: "item"
-		// })
 	}
-
+	componentWillReceiveProps(){
+		var newTitle = JSON.parse(window.localStorage.getItem('listPage')).name ||
+		JSON.parse(window.localStorage.getItem('listPage')).cate2Name 
+		this.setState({
+			title:newTitle
+		},()=>{
+			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
+					this.setState({
+						datalist:res.data.data.list
+					})
+				});
+		});
+	}
 	handleClick(){
 		this.setState({
 			nowPage : ++this.state.nowPage
