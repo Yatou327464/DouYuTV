@@ -45,19 +45,15 @@ class List extends Component{
 	}
 
 	componentDidMount(){
-		// console.log(this.props.titleObj);
 		this.setState({
-			title:this.props.titleObj.name,
-			shortName:this.props.titleObj.shortName
+			title:JSON.parse(localStorage.getItem("listPage")).name
 		},()=>{
-			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.state.shortName}`).then(res=>{
+			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
 					this.setState({
 						datalist:res.data.data.list
 					})
 				});
 		});
-		//console.log('name',this.state.title);
-		
 
 		// store.subscribe(()=>{
 		// 	this.setState({
@@ -78,7 +74,7 @@ class List extends Component{
 		this.setState({
 			nowPage : ++this.state.nowPage
 		})
-		axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.state.shortName}`).then(res=>{
+		axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
 			this.setState({
 				datalist:[...this.state.datalist,...res.data.data.list]
 			})

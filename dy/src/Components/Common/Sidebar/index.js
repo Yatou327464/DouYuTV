@@ -47,7 +47,7 @@ class Sidebar extends Component{
 	}
 	navLintClick(item){
 		this.props.navListPage(item);
-		// console.log(item);
+		localStorage.setItem('listPage',JSON.stringify(item))
 		this.props.history.push(`/list/${item.shortName}`);
 	}
 	
