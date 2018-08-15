@@ -1,13 +1,17 @@
 import React,{Component} from "react";
 import "./index.css"
 import axios from "axios";
+import store from "../../Redux"; //引入 公共store ,“全局”store
+import {connect} from "react-redux";//用connect函数 处理自己写的组件，
 
 class List extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			datalist:[],
-			nowPage:1
+			nowPage:1,
+			title:'',
+			shortName:''
 		};
 	}
 
@@ -17,7 +21,7 @@ class List extends Component{
 			<div id="listBox">
 				<div className="navBox">
 					<span className="iconfont icon-bofang"></span>
-					<p>刺激战场</p>
+					<p>{this.state.title}</p>
 				</div>
 				<ul>
 					{
@@ -41,11 +45,32 @@ class List extends Component{
 	}
 
 	componentDidMount(){
-		axios.get(`/api/room/list?page=${this.state.nowPage}&type=jdqscjzc`).then(res=>{
-			this.setState({
-				datalist:res.data.data.list
-			})
-		})
+		// console.log(this.props.titleObj);
+		this.setState({
+			title:this.props.titleObj.name,
+			shortName:this.props.titleObj.shortName
+		},()=>{
+			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.state.shortName}`).then(res=>{
+					this.setState({
+						datalist:res.data.data.list
+					})
+				});
+		});
+		//console.log('name',this.state.title);
+		
+
+		// store.subscribe(()=>{
+		// 	this.setState({
+		// 		title:store.getState()
+		// 	})
+		// })
+		// console.log(this.props.titleObj);
+
+		// store.dispatch({
+		// 	type:"navListPage",
+		// 	payload: "item"
+		// })
+
 	}
 
 	handleClick(){
@@ -53,7 +78,7 @@ class List extends Component{
 		this.setState({
 			nowPage : ++this.state.nowPage
 		})
-		axios.get(`/api/room/list?page=${this.state.nowPage}&type=jdqscjzc`).then(res=>{
+		axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.state.shortName}`).then(res=>{
 			this.setState({
 				datalist:[...this.state.datalist,...res.data.data.list]
 			})
@@ -62,4 +87,11 @@ class List extends Component{
 
 
 }
-export default List
+export default connect(
+		state=>{
+			return {
+				titleObj:state.listReducer
+			}
+		}
+
+	)(List)

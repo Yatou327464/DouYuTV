@@ -1,10 +1,10 @@
 // 管理列表的reducer
-const ListReducer = (prevState=[],action={})=>{
+const ListReducer = (prevState={},action={})=>{
    let {type,payload} = action;//解构赋值 拿到对应value值
    switch(type){
    		case "navListPage":
    			// console.log("listReducer",payload);
-   			return [...prevState,...payload];
+   			return {...prevState,...payload};
    		default :
    			return prevState;
    }
