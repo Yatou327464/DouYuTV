@@ -91,8 +91,6 @@ class List extends Component{
 		)
 		
 	}
-
-
 	listClick(item){
 		console.log(item)
 		this.props.detailPage(item);
@@ -101,7 +99,6 @@ class List extends Component{
 	}
 
 }
-
 export default connect(
 		state=>{
 			return {
