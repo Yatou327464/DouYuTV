@@ -1,0 +1,9 @@
+#navbar{width: 100%;height:54px; display: flex;
+  .navbar-warp{ flex: 1;height: 50px; line-height: 50px;
+  	h1.logo{height: 50px;line-height: 50px; float: left;font-size: 1em;margin: 0;}
+  	.btn-app{height: 30px;width: 70px;border-radius: 3px;background: none;margin: 10px 0 0 0;
+  		border:1px solid #ff5d23;color:#ff5d23;font-size: 10px; float: left;}
+  	.btn-charge{height: 30px;width: 49px;color: #fff;background: #ff5d23;float: left;border-radius: 3px;
+  		border:none;margin:10px 0 0 10px;font-size: 10px;}
+  }  
+} 

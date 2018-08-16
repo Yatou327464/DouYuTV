@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-
+import {withRouter} from "react-router-dom";
 import "./index.css";
 import Navbar from "../Common/Navbar"
 import axios from "axios";
@@ -11,8 +11,8 @@ import {connect} from "react-redux"; //用connect函数 处理自己写的组件
 import {NavLink }from "react-router-dom";
 class Detail extends Component{
 
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state={
 
 		}
@@ -21,12 +21,13 @@ class Detail extends Component{
 
 
 	componentDidMount(){
+		
 		//1.得到传来的id
 		// console.log(this.props.match.params.detailId)
 		// //2.ajax
-		axios.get("").then(res=>{
-			// console.log(res.data)
-		})
+		// axios.get("").then(res=>{
+		// 	// console.log(res.data)
+		// })
 	}
 
 	render(){
@@ -37,12 +38,16 @@ class Detail extends Component{
 					detail
 				</div>
 				<ul className="nav">
-					<li><NavLink to="/detail/chat" activeClassName="active">chat</NavLink></li>
-					<li><NavLink to="/detail/play" activeClassName="active">play</NavLink></li>
+					<li><NavLink to={`/detail/chat/${this.props.match.params.detailId}`} activeClassName="active">chat</NavLink></li>
+					<li><NavLink to={`/detail/play/${this.props.match.params.detailId}`} activeClassName="active">play</NavLink></li>
 				</ul>
+				
 				{this.props.children}
 			</div>
 		)
 	}
+
+	
+
 }
-export default Detail
+export default withRouter(Detail)

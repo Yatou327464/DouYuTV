@@ -1,8 +1,7 @@
 div#detail div.image {
   height: 200px;
   width: 100%;
-  background: red;
-  border: 1px solid #ccc; }
+  background: red; }
 
 div#detail ul.nav li {
   height: 40px;

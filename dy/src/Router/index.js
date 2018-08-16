@@ -11,6 +11,7 @@ import App from "../App"; //导入APP组件
 import Home from "../Components/Home";
 import Detail from "../Components/Detail";
 import List from "../Components/List";
+import Search from "../Components/Search";
 import Chat from "../Components/Detail/Chat";
 import Play from "../Components/Detail/Play";
 
@@ -22,27 +23,27 @@ import store from "../Redux"
 
 const router = (
 	<Provider store={store}>
-		<Router>
-			<App>
-				<Switch>
-					<Route path="/home" component={Home}/>
+	<Router>
+		<App>
+			<Switch>
+				<Route path="/home" component={Home} />
+				<Route path="/detail/:detailId" render={()=>
+					<Detail >
+						<Switch>
+							<Route path="/detail/chat/:detailId" component={Chat} />
+							<Route path="/detail/play/:detailId" component={Play} />
+						</Switch>
+					</Detail>
+				}/>
+				<Route path="/search" component={Search}/>
+				<Route path="/list/:listId" component={List}/>
+				
 
-					<Route path="/detail/:detailId" render={()=>
-						<Detail>
-							<Switch>
-								<Route path="/detail/chat" component={Chat} />
-								<Route path="/detail/play" component={Play} />
-								<Redirect from="/detail" to="/detail/chat"/>
-							</Switch>
-						</Detail>
-					}/>
+				<Redirect from="*" to="/home"/>
+			</Switch>
+		</App>
+	</Router>
+	</Provider>
+)
 
-					<Route path="/list/:listId" component={List}/>
-					
-
-					<Redirect from="*" to="/home"/>
-				</Switch>
-			</App>
-		</Router>
-	</Provider>)
 export default router
