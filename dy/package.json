@@ -29,10 +29,17 @@
     "eject": "react-scripts eject"
   },
   "proxy": {
+    "/proxy":{
+      "target": "http://172.18.12.14:8080",
+      "host":"http://172.18.12.14:8080",
+      "port":8080,
+      "changeOrigin":true
+    },
     "/api": {
       "target": "https://m.douyu.com/",
       "host": "m.douyu.com",
       "changeOrigin": true
     }
+
   }
 }

@@ -33,7 +33,7 @@ class List extends Component{
 					<p>{this.state.title}</p>
 				</div>
 				<ul>
-					{
+					{ 
 						this.state.datalist.map(item=>
 							<li key={item.rid} onClick={this.listClick.bind(this,item)}>
 								<div className="roomShow">
@@ -52,10 +52,11 @@ class List extends Component{
 			</div>
 		)
 	}
-
 	componentDidMount(){
 		var newTitle = JSON.parse(window.localStorage.getItem('listPage')).name ||
-		JSON.parse(window.localStorage.getItem('listPage')).cate2Name 
+		JSON.parse(window.localStorage.getItem('listPage')).cate2Name || 
+		JSON.parse(window.localStorage.getItem('listPage')).tabName 
+		console.log('title',newTitle);
 		this.setState({
 			title:newTitle
 		},()=>{
@@ -68,7 +69,8 @@ class List extends Component{
 	}
 	componentWillReceiveProps(){
 		var newTitle = JSON.parse(window.localStorage.getItem('listPage')).name ||
-		JSON.parse(window.localStorage.getItem('listPage')).cate2Name 
+		JSON.parse(window.localStorage.getItem('listPage')).cate2Name ||
+		JSON.parse(window.localStorage.getItem('listPage')).tabName 
 		this.setState({
 			title:newTitle
 		},()=>{
