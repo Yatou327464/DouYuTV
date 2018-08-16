@@ -27,23 +27,13 @@ const router = (
 		<App>
 			<Switch>
 				<Route path="/home" component={Home} />
-				<Route path="/detail/:detailId" render={()=>
-					<Detail >
-						<Switch>
-							<Route path="/detail/chat/:detailId" component={Chat} />
-							<Route path="/detail/play/:detailId" component={Play} />
-						</Switch>
-					</Detail>
-				}/>
+				<Route path="/detail/:detailId" component={Detail}/>
 				<Route path="/search" component={Search}/>
 				<Route path="/list/:listId" component={List}/>
-				
-
 				<Redirect from="*" to="/home"/>
 			</Switch>
 		</App>
 	</Router>
 	</Provider>
 )
-
 export default router

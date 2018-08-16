@@ -3,6 +3,7 @@ import React,{Component} from "react";
 import axios from "axios";
 import "./index.css";
 
+
 class Play extends Component{
 
 	constructor(props){
@@ -23,7 +24,7 @@ class Play extends Component{
 				<ul className="list">
 					{
 						this.state.datalist.map(item=>
-							<li key={item.rid} onClick={this.handleClick.bind(this,item.rid)}>
+							<li key={item.rid} onClick={this.handleClick.bind(this,item)}>
 								
 									<p className="img" style={{backgroundImage:`url(${item.roomSrc})`}}></p>
 									<p className="article">{item.roomName}</p>
@@ -38,21 +39,29 @@ class Play extends Component{
 	}
 
 	componentDidMount(){
+		
 		var newpage = JSON.parse(window.localStorage.getItem("detailPage")).rid
 		this.setState({newdetail:newpage},()=>{
-			axios.get(`/api/room/alikeList?rid=${this.state.newdetail}&count=4`).then(res=>{
+			axios.get(`/api/room/alikeList?rid=${this.props.match.params.detailId}&count=4`).then(res=>{
 				this.setState({datalist:res.data.data})
 			})
 		})
 	}
 
 	handleClick(data){
-		console.log(data);
-		//编程式导航
-		
-			this.props.history.push(`/detail/${data}`);
-	
-		
+		console.log(data)
+		this.props.history.push(`/detail/${data.rid}`);
+		localStorage.setItem('detailPage',JSON.stringify(data));
+		window.location.reload(true);
+
 	}
+	// componentWillReceiveProps(){		
+	// 	var newpage = JSON.parse(window.localStorage.getItem("detailPage")).rid
+		
+	// 		axios.get(`/api/room/alikeList?rid=${this.props.match.params.detailId}&count=4`).then(res=>{
+	// 			console.log(res)
+	// 			this.setState({datalist:res.data.data})
+	// 	})
+	// }
 }
 export default Play;

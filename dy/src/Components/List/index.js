@@ -92,7 +92,7 @@ class List extends Component{
 		
 	}
 	listClick(item){
-		console.log(item)
+		// console.log(item)
 		this.props.detailPage(item);
 		localStorage.setItem('detailPage',JSON.stringify(item));
 		this.props.history.push(`/detail/${item.rid}`);
