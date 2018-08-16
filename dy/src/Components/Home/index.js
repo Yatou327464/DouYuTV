@@ -5,17 +5,25 @@ import Sidebar from '../Common/Sidebar'
 import Classify from '../Common/Classify'
 import axios from "axios"
 import {connect} from "react-redux";
+import { Carousel, WingBlank } from 'antd-mobile';
+
+
 
 class Home extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
+
 			datalist:[],
 			sideList:[],
 			hotList:[],
 			yzList:[],
 			liveList:[],
-			liveCount:0
+			liveCount:0,
+
+			slideData: [],
+            imgHeight: 210,
+            slideIndex: 1
 		}
 		
 	}
@@ -34,6 +42,34 @@ class Home extends Component{
         				<Classify history={this.props.history} titleShow={true}/>
         			</div>
         		</Sidebar>
+
+        				<WingBlank>
+        				    <Carousel
+        				      autoplay={true} 
+        		              infinite
+        		              autoplayInterval={1000}
+        		              dotStyle={{marginTop:'-20px'}}
+        		              dotActiveStyle={{marginTop:'-20px'}}
+        				    >
+        				      {this.state.slideData.map(item => (
+        				        <a
+        				          key={item.rid}
+        		                  onClick={this.slideClick.bind(this,item)}
+        				          style={{ display: 'inline-block', width: '100%' }}
+        				        >
+        				          <img
+        				            src={`${item.pic}`}
+        				            alt=""
+        				            style={{ width: '100%', verticalAlign: 'top',height:"240px" }}
+        				            onLoad={() => {
+        				              window.dispatchEvent(new Event('resize'));
+        				              this.setState({ imgHeight: 'auto' });
+        				            }}
+        				          />
+        				        </a>
+        				      ))}
+        				    </Carousel>
+        				</WingBlank>
 
         		<header>
         			<ol>
@@ -94,12 +130,26 @@ class Home extends Component{
 					<p>湖北省武汉市东湖开发区光谷软件园F4栋8楼</p>
 					<p>版权所有 © www.douyu.com 鄂ICP备15011961号-1</p>
 				</footer>
+
+        		
+        		
 			</section>
 			
        	)
 	}
 
 	componentDidMount(){
+		Promise.all([axios.get("/homeData.json")]).then(res=>{
+            this.setState({
+                slideData:res[0].data.slideList
+            })
+				// console.log("全部",res[0])
+                console.log(res[0].data.slideList)
+
+		}).catch(error=>{
+			console.log(error)		
+		})
+		
 		axios.post('/api/proxy/douyu/index/https',{"url":"https://m.douyu.com/"}).then(res=>{
 			this.setState({
 			sideList:res.data.data.sideList,
@@ -150,6 +200,18 @@ class Home extends Component{
 	searchClick(){
 		this.props.history.push("/search")
 	}
+
+
+    //走马灯
+    componentDidUpdate() {    
+        if (this.state.slideIndex !== this.state.slideData.length - 1) {
+          this.setState({ slideIndex: this.state.slideData.length - 1 });
+        }
+    }
+    //走马灯传参进入详情页
+    slideClick(item){
+        this.props.history.push(`/detail/${item.rid}`)
+    }
 	
 }
 

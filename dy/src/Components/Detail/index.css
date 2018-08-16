@@ -1,0 +1,19 @@
+div#detail div.image {
+  position: fixed;
+  height: 200px;
+  width: 100%;
+  background: red;
+  top: 50px; }
+
+div#detail ul.nav {
+  height: 40px;
+  width: 100%;
+  position: fixed;
+  top: 250px;
+  background: #fff; }
+  div#detail ul.nav li {
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    width: 50%;
+    border-bottom: 1px solid #ccc; }
