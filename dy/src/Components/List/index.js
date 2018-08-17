@@ -54,6 +54,7 @@ class List extends Component{
 	}
 
 	componentDidMount(){
+		console.log(this)
 		var newTitle = JSON.parse(window.localStorage.getItem('listPage')).name ||
 		JSON.parse(window.localStorage.getItem('listPage')).cate2Name 
 		this.setState({

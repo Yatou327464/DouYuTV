@@ -71,12 +71,13 @@ class Home extends Component{
 	}
 
 	componentDidMount(){
+
 		Promise.all([axios.get("/homeData.json")]).then(res=>{
             this.setState({
                 slideData:res[0].data.slideList
             })
 				// console.log("全部",res[0])
-                console.log(res[0].data.slideList)
+                // console.log(res[0].data.slideList)
 
 		}).catch(error=>{
 			console.log(error)		

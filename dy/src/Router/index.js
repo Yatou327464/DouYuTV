@@ -17,19 +17,22 @@ import Play from "../Components/Detail/Play";
 
 import {Provider} from "react-redux";
 import store from "../Redux";
+
 const router = (
 	<Provider store={store}>
 	<Router>
-		<App>
+		<App >
 			<Switch>
 				<Route path="/home" component={Home} />
+
 				<Route path="/detail/:detailId" render={()=>
-					<Detail>
+					<Detail >
 						<Switch>
-							<Route path="/detail/chat" component={Chat} />
-							<Route path="/detail/play" component={Play} />
+							<Route path="/detail/:detailId/chat" component={Chat} />
+							<Route path="/detail/:detailId/play" component={Play} />
 						</Switch>
 					</Detail>
+					
 				}/>
 				<Route path="/search" component={Search}/>
 				<Route path="/list/:listId" component={List}/>
