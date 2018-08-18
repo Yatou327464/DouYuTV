@@ -53,61 +53,89 @@
       display: inline-block;
       margin-left: 5px; }
 
-.search-all .search-all-anchor ul {
-  clear: both;
-  padding: 10px;
-  box-sizing: border-box; }
-  .search-all .search-all-anchor ul li {
-    width: 25%;
-    box-sizing: border-box;
-    height: 107px;
-    padding: 0 5px 20px;
-    margin-bottom: 20px;
-    /* margin: 0 2% 5px; */
-    position: relative;
-    display: inline-block;
-    float: left; }
-    .search-all .search-all-anchor ul li img {
-      display: block;
-      padding: 0;
-      margin: 0;
-      width: 70px;
+.search-all .search-all-cate {
+  overflow: hidden;
+  clear: both; }
+  .search-all .search-all-cate ul {
+    padding: 10px;
+    box-sizing: border-box; }
+    .search-all .search-all-cate ul li {
+      box-sizing: border-box;
+      width: 25%;
       height: 70px;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      border-radius: 4px; }
-    .search-all .search-all-anchor ul li p {
-      width: 100%;
-      overflow: hidden;
-      -o-text-overflow: ellipsis;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      word-break: break-all;
-      font-size: 11px;
-      color: #999;
-      margin-top: 5px;
-      text-align: left; }
-    .search-all .search-all-anchor ul li .nickname {
-      font-size: 12px;
-      color: #333;
-      margin-top: 8px; }
-  .search-all .search-all-anchor ul li:before {
-    content: " ";
-    display: inline-block;
-    background-image: url("/img/playing.png");
-    width: 56px;
-    height: 17px;
-    top: 0;
-    display: block;
-    position: absolute;
-    background-repeat: no-repeat;
-    -moz-background-size: 100% 100%;
-    background-size: 100% 100%; }
+      padding: 0 5px 20px;
+      margin-bottom: 20px;
+      /* margin: 0 2% 5px; */
+      position: relative;
+      display: inline-block;
+      float: left; }
+      .search-all .search-all-cate ul li img {
+        display: block;
+        padding: 0;
+        margin: 0;
+        width: 70px;
+        height: 70px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px; }
+
+.search-all .search-all-anchor {
+  overflow: hidden;
+  clear: both; }
+  .search-all .search-all-anchor ul {
+    padding: 10px;
+    box-sizing: border-box; }
+    .search-all .search-all-anchor ul li {
+      width: 25%;
+      box-sizing: border-box;
+      height: 107px;
+      padding: 0 5px 20px;
+      margin-bottom: 20px;
+      /* margin: 0 2% 5px; */
+      position: relative;
+      display: inline-block;
+      float: left; }
+      .search-all .search-all-anchor ul li img {
+        display: block;
+        padding: 0;
+        margin: 0;
+        width: 70px;
+        height: 70px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px; }
+      .search-all .search-all-anchor ul li p {
+        width: 100%;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        font-size: 11px;
+        color: #999;
+        margin-top: 5px;
+        text-align: left; }
+      .search-all .search-all-anchor ul li .nickname {
+        font-size: 12px;
+        color: #333;
+        margin-top: 8px; }
+    .search-all .search-all-anchor ul li:before {
+      content: " ";
+      display: inline-block;
+      background-image: url("/img/playing.png");
+      width: 56px;
+      height: 17px;
+      top: 0;
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      -moz-background-size: 100% 100%;
+      background-size: 100% 100%; }
 
 .search-all .search-all-live {
+  overflow: hidden;
   clear: both; }
   .search-all .search-all-live ul {
-    overflow: hidden;
     padding-right: 5px;
     clear: both; }
     .search-all .search-all-live ul li {
@@ -158,3 +186,15 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap; }
+    .search-all .search-all-live ul li:before {
+      content: " ";
+      display: inline-block;
+      background-image: url("/img/playing.png");
+      width: 56px;
+      height: 17px;
+      z-index: 10;
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      -moz-background-size: 100% 100%;
+      background-size: 100% 100%; }

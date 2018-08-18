@@ -1,0 +1,79 @@
+.search-anchor {
+  clear: both;
+  width: 100%; }
+  .search-anchor ul {
+    overflow: hidden;
+    padding-right: 5px;
+    clear: both; }
+    .search-anchor ul li {
+      height: 70px;
+      width: 100%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -moz-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -moz-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      margin: 0;
+      border-bottom: 1px solid #eee; }
+      .search-anchor ul li img {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        border-radius: 50px;
+        margin: 0 10px; }
+      .search-anchor ul li .down-line {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -moz-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        overflow: hidden; }
+        .search-anchor ul li .down-line p {
+          max-width: 100%;
+          overflow: hidden;
+          -o-text-overflow: ellipsis;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          word-break: break-all;
+          font-size: 13px;
+          color: #999;
+          margin-top: 0;
+          line-height: 20px; }
+        .search-anchor ul li .down-line p.follow {
+          text-align: left; }
+          .search-anchor ul li .down-line p.follow span {
+            margin-right: 20px; }
+        .search-anchor ul li .down-line p.nickname {
+          line-height: 1.2;
+          font-size: 14px;
+          color: #333;
+          margin-top: 0; }
+          .search-anchor ul li .down-line p.nickname .name {
+            float: left;
+            max-width: 150px;
+            overflow: hidden;
+            word-break: break-all;
+            white-space: nowrap;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis; }
+          .search-anchor ul li .down-line p.nickname .belive {
+            float: right;
+            margin: 4.5px 10px 0 0;
+            width: 60px;
+            height: 11px;
+            background-image: url("/img/playing.png");
+            background-repeat: no-repeat;
+            -moz-background-size: 100% 100%;
+            background-size: 100% 100%; }

@@ -6,7 +6,7 @@ class Chat extends Component{
 	render(){
 		return (
 			<div id="chat">
-				这是Chat
+				
 			</div>
 		)
 	}

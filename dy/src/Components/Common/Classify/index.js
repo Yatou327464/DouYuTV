@@ -1,7 +1,7 @@
 import React,{Component} from "react"
 import "./index.css"
 
-
+import {ActivityIndicator} from "antd-mobile";
 import {connect} from "react-redux";//用connect函数 处理自己写的组件，
 import axios from "axios"
 class Classify extends Component{
@@ -10,7 +10,8 @@ class Classify extends Component{
 		this.state = {
 			isShow:false,
 			navIndex:0,
-			imgList:[]
+			imgList:[],
+			animating:true
 		}
 	}
 
@@ -58,13 +59,18 @@ class Classify extends Component{
 					}
 					</div>
 				</div>
-				    		  
+				  <ActivityIndicator
+				                  toast
+				                  text="Loading..."
+				                  animating={this.state.animating}
+				             />  		  
 			</nav>
 		)
 	}
 	componentDidMount() {
 		//判断navList长度，如果没有数据像redux请求ajax
 		Promise.all([axios.get("/api/cate/list?type=")]).then(res=>{
+
 			if(this.props.navList.length===1  ){
 				this.props.classifynavList(res[0]);
 			}
@@ -72,10 +78,11 @@ class Classify extends Component{
 				this.props.classifyimgList(res[0]);
 			}
 			this.setState({
-					imgList:res[0].data.data.cate2Info
+					imgList:res[0].data.data.cate2Info,
+					animating:false
 			})
 		}).catch(error=>{
-				console.log(error)//就是出错的信息		
+				console.log(error)//就是出错的信息	
 		})
 	}
 	//点击更多重置数据到全部

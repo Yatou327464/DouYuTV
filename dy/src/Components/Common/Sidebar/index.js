@@ -1,6 +1,6 @@
 import React,{Component} from "react"
 import "./index.css"
-
+// import {ActivityIndicator} from "antd-mobile";
 import {connect} from "react-redux";//用connect函数 处理自己写的组件，
 import axios from "axios"
 class Sidebar extends Component{

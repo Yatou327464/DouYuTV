@@ -7,7 +7,7 @@ import axios from "axios"
 import {connect} from "react-redux";
 import { Carousel, WingBlank } from 'antd-mobile';
 
-
+import {ActivityIndicator} from "antd-mobile";
 
 class Home extends Component{
 	constructor(props){
@@ -25,7 +25,8 @@ class Home extends Component{
 
 			slideData: [],
             imgHeight: 210,
-            slideIndex: 1
+            slideIndex: 1,
+            animating:true
 		}
 		
 	}
@@ -202,6 +203,11 @@ class Home extends Component{
 					<p>湖北省武汉市东湖开发区光谷软件园F4栋8楼</p>
 					<p>版权所有 ? www.douyu.com 鄂ICP备15011961号-1</p>
 				</footer>
+				<ActivityIndicator
+			                toast
+			                text="Loading..."
+			                animating={this.state.animating}
+			              />
 			</section>			
        	)
 	}
@@ -209,12 +215,16 @@ class Home extends Component{
 	componentDidMount(){
 		Promise.all([axios.get("/homeData.json")]).then(res=>{
             this.setState({
-                slideData:res[0].data.slideList
+                slideData:res[0].data.slideList,
+                animating:false
             })
 				// console.log("全部",res[0])
 
 		}).catch(error=>{
-			console.log(error)		
+			console.log(error)	
+			this.setState({
+					animating:false
+				})	
 		})
 		
 		axios.post('/api/proxy/douyu/index/https',{"url":"https://m.douyu.com/"}).then(res=>{
@@ -224,18 +234,21 @@ class Home extends Component{
 			yzList:res.data.data.yzList,
 			liveList:res.data.data.liveList,
 			liveCount:res.data.data.liveCount,
-			hotAllList:res.data.data.hotList
+			hotAllList:res.data.data.hotList,
+			animating:false
 			})
 		}).catch((err)=>{
 			console.log('error')
+			this.setState({
+					animating:false
+				})	
 		})
 
 		axios.get("/api/home/mix").then(res=>{
 			this.setState({
-				datalist:res.data.data
-			}
-			
-			)
+				datalist:res.data.data,
+				animating:false
+			})
 		})		
 	}
 

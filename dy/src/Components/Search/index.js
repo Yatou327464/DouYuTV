@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import Live from "./Live"
 import All from "./All"
 import Anchor from "./Anchor"
+import {ActivityIndicator} from "antd-mobile";
 class Search extends Component{
 	constructor(){
 		super();
@@ -19,18 +20,22 @@ class Search extends Component{
 			searchNav:'searchPage-nav',
 			isShowPage:false,
 			searchIco:['red','blue','green'],
-			searchList:null
+			searchList:null,
+			searchValue:'',
+			animating:false,
+			initialPage:0
 		}
 	}
 
 	render(){
 		return (
 			<div id="search">
-				<div className="search-text">
+				<div className="search-text" style={{touchAction: 'pan-y'}}>
 					<SearchBar
 					        placeholder="搜索房间/主播/分类"
 					        ref={ref => this.manualFocusInst = ref}
 					        showCancelButton={true}
+					        value = {this.state.searchValue}
 					        // onCancel={(value)=>this.searchClick(value)}
 					        onSubmit={(value)=>this.searchClick(value)}
 					        onCancel={(value)=>this.searchClick(value)}
@@ -41,21 +46,21 @@ class Search extends Component{
 					this.state.isShowPage?
 						<div className="searchPage" >	
 					        <Tabs tabs={this.state.tabs} 
-					        	initialPage={0} animated={false} 
+					        	initialPage={this.state.initialPage} animated={false} 
 						   		tabBarActiveTextColor="#ff6d00"
 						   		tabBarUnderlineStyle={{border:'none'}}
 					        	>
 					          	<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-						          	<All searchAll={this.state.searchList} />
+						          	<All searchAll={this.state.searchList} navMore={navValue=>this.navMore(navValue)}/>
 						          				         							         	
 						        </div>
 						       
 						        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
 
-						          	<Live searchLive={this.state.searchList.live} />
+						          	<Live searchValue={this.state.searchValue} />
 						        </div>
 						        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-						        	<Anchor/>
+						        	<Anchor searchValue={this.state.searchValue}/>
 						        </div>
 					        </Tabs>
 
@@ -66,7 +71,7 @@ class Search extends Component{
 							<ul className="search-hot-list">
 							{
 								this.props.searchHotList.map((item,index)=>
-									<li key={item}>
+									<li key={item} onClick={this.hotClick.bind(this,item)}>
 										<span className='ico' 
 											style={{background:this.icoBgColor(index)}}>
 											{index+1}
@@ -80,24 +85,36 @@ class Search extends Component{
 
 				}
 				
+				<ActivityIndicator
+					                toast
+					                text="Loading..."
+					                animating={this.state.animating}
+					           />  
 			</div>
 		)
 	}
 	
 	searchClick(value){
 		if (value!=='') {
-			Promise.all([axios.get(`/api/search/getData?sk=${value}&type=1&sort=1&limit=20&offset=0`)]).then(res=>{	
-					this.setState({
-						searchList:res[0].data.data,
-						isShowPage:true
-					})
-			}).catch(error=>{
-				
+			this.setState({
+				searchValue:value,
+				animating:true
+			},()=>{
+				Promise.all([axios.get(`/api/search/getData?sk=${value}&type=1&sort=1&limit=20&offset=0`)]).then(res=>{	
+						this.setState({
+							searchList:res[0].data.data,
+							isShowPage:true,
+							animating:false
+						})
+				}).catch(error=>{
+					
+				})
 			})
+			
 		}
 	}
 	componentWillReceiveProps(){
-		console.log('All-updata',this.props.searchAll)
+
 	}
 	icoBgColor(index){
 		return	index<3?this.state.searchIco[index]:'#ccc'
@@ -110,10 +127,30 @@ class Search extends Component{
 			}
 	}
 	
+	hotClick(value){
+		// console.log(value)
+		this.setState({
+			searchValue:value
+		},()=>this.searchClick(value))
+	}
+	//子传父，更多切换导航
+	navMore(navValue){
+		// console.log(this.state.isShowPage)
+	   	this.setState({
+	    	isShowPage:false,
+	    	animating:true
+	    },()=>
+	    	this.setState({
+		     	initialPage:navValue,
+		     	isShowPage:true,
+		     	animating:false
+	    	})	
+	    ) 
+	}
 }
 
 export default connect(
-		state=>{console.log(state)
+		state=>{
 			return {
 				searchHotList:state.searchHotListReducer
 			}

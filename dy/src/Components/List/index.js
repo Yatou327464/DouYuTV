@@ -4,6 +4,7 @@ import axios from "axios";
 import {connect} from "react-redux";//用connect函数 处理自己写的组件，
 import Navbar from '../Common/Navbar'
 import Classify from '../Common/Classify'
+import {ActivityIndicator} from "antd-mobile";
 class List extends Component{
 	constructor(props){
 		super(props);
@@ -11,7 +12,8 @@ class List extends Component{
 			datalist:[],
 			nowPage:1,
 			title:'',
-			shortName:''
+			shortName:'',
+			animating:true
 		};
 	}
 	render(){
@@ -49,6 +51,11 @@ class List extends Component{
 				<div className="footBox" onClick={this.handleClick.bind(this)}>
 					加载更多
 				</div>
+					<ActivityIndicator
+					                toast
+					                text="Loading..."
+					                animating={this.state.animating}
+					           />  
 			</div>
 		)
 	}
@@ -58,7 +65,8 @@ class List extends Component{
 		JSON.parse(window.localStorage.getItem('listPage')).cate2Name || 
 		JSON.parse(window.localStorage.getItem('listPage')).tabName 
 		this.setState({
-			title:newTitle
+			title:newTitle,
+			animating:false
 		},()=>{
 			if(this.props.match.params.listId === 'room'){
 				this.props.match.params.listId='';
@@ -75,22 +83,26 @@ class List extends Component{
 		JSON.parse(window.localStorage.getItem('listPage')).cate2Name ||
 		JSON.parse(window.localStorage.getItem('listPage')).tabName 
 		this.setState({
-			title:newTitle
+			title:newTitle,
+			animating:true
 		},()=>{
 			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
 					this.setState({
-						datalist:res.data.data.list
+						datalist:res.data.data.list,
+						animating:false
 					})
 				});
 		});
 	}
 	handleClick(){
 		this.setState({
-			nowPage : ++this.state.nowPage
+			nowPage : ++this.state.nowPage,
+			animating:true
 		},()=>
 			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
 				this.setState({
-					datalist:[...this.state.datalist,...res.data.data.list]
+					datalist:[...this.state.datalist,...res.data.data.list],
+					animating:false
 				})
 			})
 		)
