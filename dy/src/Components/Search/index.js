@@ -21,7 +21,7 @@ class Search extends Component{
 			isShowPage:false,
 			searchIco:['red','blue','green'],
 			searchList:null,
-			searchValue:'',
+			searchValue:'搜索房间/主播/分类',
 			animating:false,
 			initialPage:0
 		}
@@ -32,10 +32,9 @@ class Search extends Component{
 			<div id="search">
 				<div className="search-text" style={{touchAction: 'pan-y'}}>
 					<SearchBar
-					        placeholder="搜索房间/主播/分类"
 					        ref={ref => this.manualFocusInst = ref}
 					        showCancelButton={true}
-					        value = {this.state.searchValue}
+					        placeholder = {this.state.searchValue}
 					        // onCancel={(value)=>this.searchClick(value)}
 					        onSubmit={(value)=>this.searchClick(value)}
 					        onCancel={(value)=>this.searchClick(value)}
