@@ -85,7 +85,7 @@ class Search extends Component{
 	}
 	
 	searchClick(value){
-		if (value!='') {
+		if (value!=='') {
 			Promise.all([axios.get(`/api/search/getData?sk=${value}&type=1&sort=1&limit=20&offset=0`)]).then(res=>{	
 					this.setState({
 						searchList:res[0].data.data,

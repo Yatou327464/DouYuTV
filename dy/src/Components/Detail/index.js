@@ -2,8 +2,7 @@ import React,{Component} from "react";
 import {withRouter} from "react-router-dom";
 import "./index.css";
 import Detailbar from "./Detailbar"
-import axios from "axios";
-import store from "../../Redux"; //引入 公共store, "全局"store
+
 
 import {connect} from "react-redux"; //用connect函数 处理自己写的组件，
 //将自己写的组件 升级为容器组件（创建了一个容器组件包着自己的组件）

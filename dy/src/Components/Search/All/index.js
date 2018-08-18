@@ -1,8 +1,7 @@
 import React,{Component} from "react"
 import {withRouter} from "react-router-dom";
 import "./index.css"
-import axios from "axios";
-import {connect} from "react-redux";
+
 class All extends Component{
 	constructor(props){
 		super(props);

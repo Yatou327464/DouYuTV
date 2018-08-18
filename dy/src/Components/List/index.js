@@ -57,10 +57,12 @@ class List extends Component{
 		var newTitle = JSON.parse(window.localStorage.getItem('listPage')).name ||
 		JSON.parse(window.localStorage.getItem('listPage')).cate2Name || 
 		JSON.parse(window.localStorage.getItem('listPage')).tabName 
-		console.log('title',newTitle);
 		this.setState({
 			title:newTitle
 		},()=>{
+			if(this.props.match.params.listId === 'room'){
+				this.props.match.params.listId='';
+			}
 			axios.get(`/api/room/list?page=${this.state.nowPage}&type=${this.props.match.params.listId}`).then(res=>{
 					this.setState({
 						datalist:res.data.data.list

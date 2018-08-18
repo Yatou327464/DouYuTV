@@ -1,7 +1,6 @@
 import React,{Component} from "react"
 import "./index.css"
-import axios from "axios";
-import {connect} from "react-redux";
+
 class Live extends Component{
 	constructor(props){
 		super(props);
