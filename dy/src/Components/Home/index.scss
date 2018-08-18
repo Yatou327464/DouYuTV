@@ -8,7 +8,48 @@ html,body{
 	.icon-magnifier{font-size: 20px;color:#000;height: 50px;}
 	.navbar-classify{width: 10%;height: 50px;margin-top: 15px;}
 	header{
-		ol{
+		.headerStyle{
+			h3{
+				padding: 5px;
+				font-weight:normal;
+				box-sizing:border-box;
+				height:40px;
+				line-height:40px;
+				div{
+					width: 50%;
+					float:left;
+					text-align:left;
+					height: 40px;
+					span{
+						color:#f70;
+						font-size:24px;
+						margin-top:5px;
+					}
+					b{
+						font-weight:normal;
+						font-size:16px;
+						
+					}
+				}
+				p{
+					width: 50%;
+					float:right;
+					text-align:right;
+					span{
+						color:#ccc;
+						font-size:18px;
+					}
+					b{
+						font-weight:normal;
+						font-size:16px;
+						margin-right:10px;
+						color:#ccc;
+
+					}
+				}
+
+			}
+			ol{
 			width: 100%;
 			padding:10px 5px 0 0; 
 			overflow:hidden;
@@ -69,6 +110,89 @@ html,body{
 					overflow: hidden;
 					text-overflow:ellipsis;
 					white-space: nowrap;
+				}
+			}
+			}
+		}
+		.headerLive{
+			h3{
+				p{
+					b{
+						i{
+							font-style:normal;
+							color:#f70;
+						}
+					}
+					span{
+
+						width: 14px;
+						height: 14px;
+						text-align: center;
+						line-height: 14px;
+						border-radius: 50%;
+						background: #ccc;
+						color: #fff;
+						display: inline-block;
+						margin-left: 5px;						
+					}
+				}
+			}
+		}
+		.headerYz{
+			h3{
+				div{
+					span{
+						color:#ff5e81;
+						font-size:16px;
+					}
+				}
+				p{
+					span{
+						width: 14px;
+						height: 14px;
+						text-align: center;
+						line-height: 14px;
+						border-radius: 50%;
+						background: #ccc;
+						color: #fff;
+						display: inline-block;
+						margin-left: 5px;
+					}
+				}
+			}
+			ol{
+				li{
+					div{
+						.yzIco{
+							width: 45%;
+							height: 20px;
+							line-height:20px;
+							font-size:12px;
+							position: absolute;
+							top: 5px;
+							right:5px;
+							text-align:center;
+							background: rgba(0,0,0,.5); 
+							color:white;
+							border-radius: 3px;
+						}
+						.meinv{
+							height: 180px;
+						}
+					}
+					p{
+						width: 50%;
+						float:left;
+					}
+					b{
+						width: 50%;
+						font-weight:normal;
+						float:right;
+						font-size:12px;
+						text-align:right;
+						height:20px;
+						line-height:20px;
+					}
 				}
 			}
 		}
