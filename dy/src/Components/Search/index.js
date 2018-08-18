@@ -1,11 +1,14 @@
 import React,{Component} from "react"
-import { SearchBar, Button, WhiteSpace,Tabs, WingBlank ,Popover} from 'antd-mobile';
+import { SearchBar, Tabs} from 'antd-mobile';
 import "./index.css"
 import axios from "axios";
 import {connect} from "react-redux";
+import Live from "./Live"
+import All from "./All"
+import Anchor from "./Anchor"
 class Search extends Component{
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 		this.state = {
 			tabs:[
 			  { title: '全部' },
@@ -15,7 +18,8 @@ class Search extends Component{
 			],
 			searchNav:'searchPage-nav',
 			isShowPage:false,
-			searchIco:['red','blue','green']
+			searchIco:['red','blue','green'],
+			searchList:null
 		}
 	}
 
@@ -27,8 +31,9 @@ class Search extends Component{
 					        placeholder="搜索房间/主播/分类"
 					        ref={ref => this.manualFocusInst = ref}
 					        showCancelButton={true}
-					        onCancel={this.searchClick.bind(this)}
-					        onSubmit={this.searchClick.bind(this)}
+					        // onCancel={(value)=>this.searchClick(value)}
+					        onSubmit={(value)=>this.searchClick(value)}
+					        onCancel={(value)=>this.searchClick(value)}
 					        cancelText='搜索'
 					      />
 				</div>
@@ -37,11 +42,21 @@ class Search extends Component{
 						<div className="searchPage" >	
 					        <Tabs tabs={this.state.tabs} 
 					        	initialPage={0} animated={false} 
-					        	prefixCls={this.state.searchNav}
 						   		tabBarActiveTextColor="#ff6d00"
 						   		tabBarUnderlineStyle={{border:'none'}}
 					        	>
-					          	{this.renderContent}
+					          	<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+						          	<All searchAll={this.state.searchList} />
+						          				         							         	
+						        </div>
+						       
+						        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+
+						          	<Live searchLive={this.state.searchList.live} />
+						        </div>
+						        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+						        	<Anchor/>
+						        </div>
 					        </Tabs>
 
 						</div>
@@ -69,29 +84,36 @@ class Search extends Component{
 		)
 	}
 	
-	searchClick(){
-		console.log('搜索框发AJAX')
-
+	searchClick(value){
+		if (value!='') {
+			Promise.all([axios.get(`/api/search/getData?sk=${value}&type=1&sort=1&limit=20&offset=0`)]).then(res=>{	
+					this.setState({
+						searchList:res[0].data.data,
+						isShowPage:true
+					})
+			}).catch(error=>{
+				
+			})
+		}
 	}
-
+	componentWillReceiveProps(){
+		console.log('All-updata',this.props.searchAll)
+	}
 	icoBgColor(index){
 		return	index<3?this.state.searchIco[index]:'#ccc'
 	}
 
 	componentDidMount(){
-		
-			
-			
+
 			if(this.props.searchHotList.length===0){
-				this.props.searchHostList()
-				
+				this.props.searchHostList()				
 			}
 	}
 	
 }
 
 export default connect(
-		state=>{
+		state=>{console.log(state)
 			return {
 				searchHotList:state.searchHotListReducer
 			}

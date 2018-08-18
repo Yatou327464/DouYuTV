@@ -1,41 +1,42 @@
-#search .search-hot h3 {
-  padding-left: 10px;
-  text-align: left;
-  line-height: 55px;
-  font-size: 14px;
-  color: #333;
-  border-bottom: 1px solid #eee; }
-
-#search .search-hot ul.search-hot-list {
-  width: 100%;
-  font-size: 14px;
-  color: #333;
-  height: 220px; }
-  #search .search-hot ul.search-hot-list li {
-    width: 50%;
-    float: left;
-    box-sizing: border-box;
-    padding: 10px 10px;
-    overflow: hidden;
-    word-break: break-all;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis; }
-    #search .search-hot ul.search-hot-list li span.ico {
-      display: block;
-      background: #ccc;
+#search .search-hot {
+  position: fixed; }
+  #search .search-hot h3 {
+    padding-left: 10px;
+    text-align: left;
+    line-height: 55px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #eee; }
+  #search .search-hot ul.search-hot-list {
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+    height: 220px; }
+    #search .search-hot ul.search-hot-list li {
+      width: 50%;
       float: left;
-      width: 20px;
-      text-align: center;
-      height: 20px;
-      line-height: 20px;
-      margin-right: 25px;
-      border-radius: 2px;
-      font-size: 10px; }
-    #search .search-hot ul.search-hot-list li p.text {
-      text-align: left;
-      font-size: 10px;
-      height: 20px;
-      line-height: 20px; }
+      box-sizing: border-box;
+      padding: 10px 10px;
+      overflow: hidden;
+      word-break: break-all;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis; }
+      #search .search-hot ul.search-hot-list li span.ico {
+        display: block;
+        background: #ccc;
+        float: left;
+        width: 20px;
+        text-align: center;
+        height: 20px;
+        line-height: 20px;
+        margin-right: 25px;
+        border-radius: 2px;
+        font-size: 10px; }
+      #search .search-hot ul.search-hot-list li p.text {
+        text-align: left;
+        font-size: 10px;
+        height: 20px;
+        line-height: 20px; }
 
 .searchPage-nav {
   margin-top: 10px;

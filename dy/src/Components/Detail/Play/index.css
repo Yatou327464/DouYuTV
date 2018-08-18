@@ -1,0 +1,43 @@
+div#play {
+  margin-top: 290px; }
+  div#play div.title {
+    clear: both;
+    height: 100px;
+    background: pink; }
+  div#play h3 {
+    height: 40px;
+    line-height: 40px;
+    color: #333;
+    font-size: 16px;
+    padding-left: 10px;
+    text-align: left; }
+  div#play ul.list {
+    overflow: hidden; }
+    div#play ul.list li {
+      width: 100%;
+      width: 47%;
+      float: left;
+      margin-left: 2%; }
+      div#play ul.list li p.img {
+        height: 100px;
+        width: 100%;
+        border-radius: 6px;
+        background-size: cover;
+        margin-top: 5px; }
+      div#play ul.list li p.article {
+        text-align: left;
+        font-size: 10px;
+        height: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+  div#play div.main {
+    clear: both;
+    padding: 0 10px;
+    height: 44px;
+    line-height: 44px;
+    margin: 35px 0 18px;
+    border-radius: 22px;
+    background: #fff1e3;
+    border: 1px solid #f70;
+    color: #f70; }

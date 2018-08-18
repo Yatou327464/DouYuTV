@@ -1,5 +1,7 @@
 #listBox{
 		.navBox{
+			clear: both;
+			margin-top: 55px;
 			text-align:left;
 			height: 30px;
 			padding-left:5px;
@@ -83,7 +85,8 @@
 			font-size:14px;
 			color:#999;
 		}
-		.list-navbarBg{background: #f8f8f8;
+		.list-navbarBg{width: 100%; background: #f8f8f8;position: fixed;top: 0;
+			z-index: 100;
 			.list-classify{
 				margin-top: 17px;
 				width: 20%;

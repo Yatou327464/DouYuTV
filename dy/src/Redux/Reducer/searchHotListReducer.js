@@ -9,8 +9,6 @@ const searchHotListReducer = (prevState=[],action={})=>{
    			return prevState;
    }
 
-   // return action.payload;
-   // reducer 返回值是什么， store 存的状态就是什么
 }
 
 export default searchHotListReducer
